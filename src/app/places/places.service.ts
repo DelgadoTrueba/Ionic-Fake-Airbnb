@@ -35,4 +35,14 @@ export class PlacesService {
   }
 
   constructor() { }
+
+  getPlace(id: string): Place{
+    let place = this._places.find( (place) => {
+      if( place.id === id){
+        return true;
+      }
+    });
+
+    return { ... place };
+  }
 }
