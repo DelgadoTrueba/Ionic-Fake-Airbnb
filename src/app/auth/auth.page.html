@@ -5,9 +5,68 @@
 </ion-header>
 
 <ion-content>
-  <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner>
+  <!-- <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner> -->
+  <form #formUser="ngForm" (ngSubmit)="onSubmit(formUser)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input 
+                type="email" 
+                ngModel 
+                name="email" 
+                required 
+                email
+                #emailCtrl="ngModel"
+              >
+              </ion-input>
+            </ion-item>
 
-  <ion-button color="primary" (click)="onLoging()" *ngIf="!isLoading">
-    Login
-  </ion-button>
+            <ion-item *ngIf="!emailCtrl.valid && emailCtrl.touched" lines="none">
+                <ion-text color="danger">Should be a valid email address.</ion-text>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input 
+                type="password" 
+                ngModel 
+                name="password" 
+                required 
+                minLength="6"
+                #passwordCtrl="ngModel"
+              >
+              </ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="!passwordCtrl.valid && passwordCtrl.touched" lines="none">
+                <ion-text color="danger">Should be at least be 6 character.</ion-text>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-button type="button" color="primary" fill="clear" expand="block"
+            >Switch to login</ion-button
+          >
+
+          <ion-button
+            type="submit"
+            color="primary"
+            (click)="onLoging()"
+            *ngIf="!isLoading"
+            expand="block"
+            [disabled]="!formUser.valid"
+          >
+            Login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
