@@ -41,7 +41,16 @@ export class CreateBookingComponent implements OnInit {
   }
 
   onBookPlace(){
-    this.modalCtrl.dismiss({message: "This is a dummy message!"}, "confirm");
+    if(!this.form.valid || !this.datesValid()){
+      return;
+    }
+    this.modalCtrl.dismiss({bookingData: {
+      firstName: this.form.value['first-name'],
+      lastName: this.form.value['last-name'],
+      guestName: this.form.value.guestName,
+      startDate: this.form.value['date-form'],
+      endDate: this.form.value['date-to']
+    } }, "confirm");
   }
 
   onCancel(){
@@ -51,8 +60,8 @@ export class CreateBookingComponent implements OnInit {
   datesValid(){
     const startDate = new Date(this.form.value['date-form']);
     const endDate = new Date(this.form.value['date-to']);
-    console.log(endDate > startDate);
-    return endDate > startDate;
+    console.log(endDate < startDate);
+    return endDate < startDate;
   }
 
 }
