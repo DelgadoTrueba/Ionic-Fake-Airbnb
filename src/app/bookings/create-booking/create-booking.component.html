@@ -59,7 +59,7 @@
               picker-format="YY MMM DD"
               [min]="selectedPlace.availableFrom.toISOString()"
               [max]="selectedPlace.availableTo.toISOString()"
-              ngModel
+              [ngModel]="startDate"
               name = "date-from"
               required
               #startDateCtrl="ngModel"
@@ -74,8 +74,8 @@
               picker-format="YY MMM DD"
               [min]="startDateCtrl.value"
               [max]="selectedPlace.availableTo.toISOString()"
-              ngModel
-              name = "date-from"
+              [ngModel]="endDate"
+              name = "date-to"
               required
             ></ion-datetime>
           </ion-item>
