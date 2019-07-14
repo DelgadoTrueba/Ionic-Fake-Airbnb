@@ -41,14 +41,14 @@ export class CreateBookingComponent implements OnInit {
   }
 
   onBookPlace(){
-    if(!this.form.valid || !this.datesValid()){
+    if(!this.form.valid || this.datesValid() ){
       return;
     }
     this.modalCtrl.dismiss({bookingData: {
       firstName: this.form.value['first-name'],
       lastName: this.form.value['last-name'],
-      guestName: this.form.value.guestName,
-      startDate: this.form.value['date-form'],
+      guestNumber: this.form.value['guest-number'],
+      startDate: this.form.value['date-from'],
       endDate: this.form.value['date-to']
     } }, "confirm");
   }
@@ -58,9 +58,8 @@ export class CreateBookingComponent implements OnInit {
   }
 
   datesValid(){
-    const startDate = new Date(this.form.value['date-form']);
+    const startDate = new Date(this.form.value['date-from']);
     const endDate = new Date(this.form.value['date-to']);
-    console.log(endDate < startDate);
     return endDate < startDate;
   }
 
